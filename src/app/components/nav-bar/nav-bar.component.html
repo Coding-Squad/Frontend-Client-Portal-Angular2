@@ -1,0 +1,38 @@
+
+<div class="page-top" style="width: 100%; height: 20px; background-color: #f46b42"></div>
+<nav class="navbar navbar-default navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand pointer" routerLink="/home" ><font color="white">ESPRIT RESTAURANT</font></a>
+		</div>
+
+		<div id="navbar">
+			<ul class="nav navbar-nav navbar-left" *ngIf="loggedIn">
+				<li><a md-button routerLink="/dishList"><font color="white">MENU</font></a></li>
+				<form (ngSubmit)="onSearcyByTitle()" class="navbar-form">
+					<div class="form-group">
+						<input type="text" name="searcyByTitle" [(ngModel)]="keyboard" class="form-control" placeholder="Dish Title" />
+					</div>
+					<button type="submit" class="btn btn-default">Search</button>
+				</form>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" >
+				<li *ngIf="loggedIn">
+					<a md-button routerLink="/dishList"><font color="white">MENU</font></a>
+				</li>
+				<li *ngIf="loggedIn">
+					<a md-button routerLink="/orderList"><font color="white">View Order List</font></a>
+				</li>
+				<li *ngIf="loggedIn">
+					<a md-button routerLink="/orderSummary"><font color="white">Order Summary</font></a>
+				</li>
+				<li *ngIf="loggedIn">
+					<a md-button routerLink="/rating"><font color="white">Rate Us</font></a>
+				</li>
+				<li *ngIf="loggedIn">
+					<a md-button (click)="logout()"><font color="white">LOGOUT</font></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

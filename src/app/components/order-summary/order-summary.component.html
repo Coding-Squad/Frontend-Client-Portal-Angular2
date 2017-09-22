@@ -1,0 +1,54 @@
+ <div class="container">
+ <div class="row">
+<div class="col-xs-4">
+	<img src="../../../assets/Dishes ordered_orange.jpg" style="width:1150px; height: 280px; z-index:1;" />
+</div>
+</div>
+ </div>
+
+<div class="container" style="background-color: #c6c6c6; margin-top:10px;">
+    <div class="row">
+        <div class="col-xs-8">
+            <h2 class="section-headline"><span>Order summary</span></h2>
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
+        <div class="col-xs-12">
+            <br/>
+            <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-3">
+                    <h4>Order number</h4>
+                </div>
+                <div class="col-xs-2">
+                    <h4>Order Date</h4>
+                </div>
+                <div class="col-xs-2">
+                    <h4>Total price</h4>
+                </div>
+                <div class="col-xs-4">
+                    <h4>Rating</h4>
+                </div>
+            </div>
+            <div class="row" *ngFor="let order of orderListSummary">
+                <hr/>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-3">
+                    <a class="pointer"><h4>{{order.id}}</h4></a>
+                </div>
+                <div class="col-xs-2">
+                    <h5 ><span>{{order.orderDate | date: 'dd/MM/yyyy'}}</span></h5>
+                </div>
+                <div class="col-xs-2">
+                    <h5 ><span>{{order.ordertotal }}</span> DT</h5>          			
+                </div>
+                <div class="col-xs-4">                    
+                    <h5 style="color:#db3208; font-size:large;"><rating [(ngModel)]="order.rating" color="red"
+                        [titles]="['Awful', 'average', 'Good', 'Very good', 'Excellent']" (click)="onRateOrder(order)">
+                    </rating></h5>           			
+                </div>  
+            </div>  
+        </div>      
+    </div>
+</div>

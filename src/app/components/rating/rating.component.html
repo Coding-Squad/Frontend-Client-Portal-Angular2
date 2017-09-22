@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row" style="background-color: white; margin-top:100px; margin-bottom: 100px;">
+<div class="col-xs-6">
+  <img src="../../../assets/rate.jpg" style="width:500px; height: 400px; z-index:1; margin-top: 25px; margin-bottom: 25px;" />
+</div>
+<div class="col-xs-6">
+<h1> Food &nbsp;&nbsp;&nbsp;  : <rating [(ngModel)]="rating.food" color="red"
+                        [titles]="['Awful', 'average', 'Good', 'Very good', 'Excellent']" (click)="onRateUser(rating)">
+                    </rating></h1>
+					<h1> Service :<rating [(ngModel)]="rating.service" color="red"
+                        [titles]="['Awful', 'average', 'Good', 'Very good', 'Excellent']" (click)="onRateUser(rating)">
+                    </rating></h1>
+					<h1> Price &nbsp;&nbsp;&nbsp;  :<rating [(ngModel)]="rating.price" color="red"
+                        [titles]="['Awful', 'average', 'Good', 'Very good', 'Excellent']" (click)="onRateUser(rating)">
+                    </rating></h1>
+</div>
+</div>
+</div>

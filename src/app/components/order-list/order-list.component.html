@@ -1,0 +1,150 @@
+ <div class="container">
+ <div class="row">
+<div class="col-xs-4">
+	<img src="../../../assets/Dishes ordered_black.jpg" style="width:1150px; height: 280px; z-index:1;" />
+</div>
+</div>
+ </div>
+<div class="container" [hidden]="orderConfirmed" style="background-color: #c6c6c6; margin-top:10px;">
+    <div class="row">
+        <div class="col-xs-8">
+            <h2 class="section-headline"><span>Orders List</span></h2>
+            <div *ngIf="emptyOrder" class="alert alert-warning">
+                Oops, your orders list is empty. See if you can find what you link in the dishlist and add them.
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-6 text-left">
+                    <a md-raised-button class="mat-warn" routerLink="/dishList">Go back to the Menu</a>
+                </div>
+            </div>
+            <br/>
+            <div *ngIf="orderItemUpdated" class="alert alert-success">
+                Cart Item Updated Successfully!
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <h4>Dishes</h4>
+                </div>
+                <div class="col-xs-2">
+                    <h4>Price</h4>
+                </div>
+                <div class="col-xs-2">
+                    <h4>Qty</h4>
+                </div>
+            </div>
+            <div class="row" *ngFor="let orderItem of orderItemList">
+                <hr/>
+                <div class="col-xs-2">
+                    <a md-button (click)="onSelect(orderItem.book)"><img class="img-responsive" src="{{serverPath}}/image/dish/{{orderItem.dish.id}}.png" style="width:70px;" /></a>
+                </div>
+                <div class="col-xs-6">
+                    <a class="pointer" (click)="onSelect(orderItem.dish)">
+                        <h4>{{orderItem.dish.title}}</h4></a>
+                    
+                    <a md-raised-button class="mat-warn" (click)="onRemoveOrderItem(orderItem)">delete</a>
+                </div>
+                <div class="col-xs-2">
+                    <h5 style="color:#db3208; font-size:large;"><span>{{orderItem.dish.price}}</span> DT
+            			</h5>
+                </div>
+                <div class="col-xs-2">
+                    <input hidden="hidden" name="id" [(ngModel)]="orderItem.id" />
+                    <input id="orderItem.id" name="qty" class="form-control cartItemQty" [(ngModel)]="orderItem.qty" (ngModelChange)="orderItem.toUpdate=true" />
+                    <button md-raised-button *ngIf="orderItem.toUpdate" (click)="onUpdateOrdertItem(orderItem)" class="mat-primary">update</button>
+                </div>
+            </div>
+            <div class="row">
+                <hr />
+                <h4 class="col-xs-12 text-right"><strong style="font-size: large">Total Price (<span>{{orderItemNumber}}</span> items): </strong><span style="color:#db3208;font-size: large"><span>{{orderList.grandTotal}}</span> DT</span></h4>
+                <button md-raised-button type="submit " *ngIf="!emptyOrder" (click)="goToOrderSummary()" class="btn-block mat-primary">Go to Order Summary</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+//checkout 
+
+<div class="container" [hidden]="!orderConfirmed" style="background-color: #ededed; margin-top:10px;">
+    <div class="row">
+        <div class="col-xs-8">
+            <h2 class="section-headline"><span>Checkout</span></h2>
+            <h3><span *ngIf="orderPlaced" style="color:forestgreen"><i class="fa fa-check" style="color:forestgreen"></i>Order confirmed successfully</span></h3>
+        </div>      
+    </div>
+    <hr style="position: absolute;width:85%; height:6px; background-color: #333; z-index:-1; margin-top: -170px;" />
+    <div class="row" style="margin-top: 20px;">
+        <form (ngSubmit)="onSubmit()" method="post">
+            <div class="col-xs-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <button md-raised-button type="submit " class="btn-block mat-primary">Place your order
+                        </button>                      
+                        <hr/>
+                        <h3>Order Summary</h3>
+                        <hr />
+                        <div class="row ">
+                            <div class="col-xs-7 text-left ">
+                                <h3 style="color:darkred; "><strong>Order total:</strong></h3>
+                            </div>
+                            <div class="col-xs-5 text-right ">
+                                <h3><strong style="color:darkred; "><span
+                                        >{{orderList.grandTotal | number : '1.2-2'}}</span> DT
+                                </strong></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8 ">
+                <md-tab-group >                  
+                    <md-tab label="Review">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading ">
+                                <h4 class="panel-title ">Review Items</h4>
+                            </div>
+                            <div class="panel-body ">                             
+                                <div class="row ">
+                                    <div class="col-xs-8 ">
+                                        <h4>Dish title</h4></div>
+                                    <div class="col-xs-2 ">
+                                        <h4>Price</h4></div>
+                                    <div class="col-xs-2 text-center ">
+                                        <h4>Qty</h4></div>
+                                </div>                               
+                                <div class="row " *ngFor="let orderItem of orderItemList ">
+                                    <hr/>
+                                    <div class="col-xs-2 ">
+                                        <a md-button (click)="onSelect(orderItem.dish)"><img class="img-responsive shelf-book" src="{{serverPath}}/image/dish/{{orderItem.dish.id}}.png" style="width:70px;" /></a>
+                                    </div>
+                                    <div class="col-xs-6 ">
+                                        <a class="pointer" (click)="onSelect(orderItem.dish)"><h4>{{orderItem.dish.title}}</h4></a>                                       
+                                    </div>
+                                    <div class="col-xs-2 ">
+                                        <h5 style="color: #db3208; font-size: large;"><span >{{orderItem.dish.price}}</span>DT</h5>
+                                    </div>
+                                    <div class="col-xs-2 text-center ">
+                                        <h5 style="font-size: large ">{{orderItem.qty}}</h5>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <h4 class="col-xs-12 text-right"><Strong style="font-size: large">Total Price (<span>{{orderItemNumber}}</span> items): </Strong><span
+                        style="color: #db3208; font-size: large;"><span
+                        ></span>{{orderList.grandTotal}}</span> DT</h4>
+                                <br/>
+                                <br/>
+                            </div>
+                        </div>
+                    </md-tab>
+                </md-tab-group>
+            </div>
+        </form>
+    </div>
+</div>
+
+
