@@ -1,28 +1,27 @@
-# ClientPortal
+# Intelligent Restaurant - ClientPortal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.0-beta.0.
+Intelligent restaurant is a project that allows a dynamic restaurant management through the use of some Machine learning algorithms (Decisional tree J48). Each client will have a specific menu list generated with his previous visits.
 
-## Development server
+In this portal, the client can do all the basics functionalities like placing an order, rating a dish .. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## How to run
 
-## Code scaffolding
+- Run the backend part (Spring boot project) on STS or any other IDE
+- Run the frontend part with `ng serve`. You can choose the desired port for example `ng serve --port 4200`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+If your are running this project for the first time then you have to install all the dependencies (NG valor, Angular material ..) with `npm install`
 
-## Build
+## Tools used
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+- Spring Boot
+- Spring Security
+- Angular 2
+- Angular Material
+- NG Valor (chart)
+- Weka API (Machine Learning)
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
